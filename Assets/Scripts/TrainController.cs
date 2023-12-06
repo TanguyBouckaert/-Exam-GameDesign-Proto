@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class TrainController : MonoBehaviour
 {
-    float moveSpeed = 5.0f;
-    Vector3 _startPosition;
-    Quaternion _startRotation;
+    [SerializeField]
+    private float moveSpeed = 5.0f;
+    private Vector3 _startPosition;
+    private Quaternion _startRotation;
 
     private void Awake()
     {
