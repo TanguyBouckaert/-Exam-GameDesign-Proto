@@ -25,4 +25,12 @@ public class TurningWheel : MonoBehaviour
         }
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Train"))
+        {
+            Debug.Log("Train hit!");
+        }
+    }
 }
