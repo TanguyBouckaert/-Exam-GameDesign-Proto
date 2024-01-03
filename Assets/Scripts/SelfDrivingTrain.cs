@@ -7,10 +7,23 @@ public class SelfDrivingTrain : MonoBehaviour
     [SerializeField]
     public float Speed;
 
+    [SerializeField]
+    private Rigidbody rb;
+
     private bool _drive = true;
     private float _actualSpeed = 2.5f;
 
-    private void Update()
+    private void Start()
+    {
+        // Check if a Rigidbody component is attached
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody component not found on this object. Please attach a Rigidbody.");
+        }
+    }
+
+
+    private void FixedUpdate()
     {
         //Makes the train stop when it is required!
         if (_drive)
@@ -18,12 +31,9 @@ public class SelfDrivingTrain : MonoBehaviour
         if (!_drive)
             _actualSpeed = 0;
 
-       transform.Translate(Vector3.forward * _actualSpeed * Time.deltaTime);
-    }
+       Vector3 force = Vector3.back * _actualSpeed * 1.0f;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-
+        rb.AddForce(force);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,5 +42,12 @@ public class SelfDrivingTrain : MonoBehaviour
         {
             _drive = false;
         }
+    }
+
+
+    public void Drive()
+    {
+        _drive = true;
+        rb.AddForce(Vector3.back * _actualSpeed *1.0f);
     }
 }

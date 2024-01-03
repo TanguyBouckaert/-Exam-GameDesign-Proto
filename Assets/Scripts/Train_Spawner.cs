@@ -14,14 +14,21 @@ public class Train_Spawner : MonoBehaviour
     public float DropTime;
 
     private float _timer;
+    private bool _firstSpawn;
+
+    private void Start()
+    {
+        _firstSpawn = true;
+    }
 
     // Update is called once per frame
     void Update()
     {
         _timer += Time.deltaTime;
 
-        if(_timer >= DropTime)
+        if(_timer >= DropTime || _firstSpawn)
         {
+            _firstSpawn = false;
             if(SelfDriving)
             {
                 Instantiate(SelfDrivingPrefab, this.transform);
@@ -32,5 +39,10 @@ public class Train_Spawner : MonoBehaviour
             }
             _timer = 0;
         }
+    }
+
+    public float GetDropTime()
+    {
+        return DropTime;
     }
 }
