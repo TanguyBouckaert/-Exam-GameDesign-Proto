@@ -11,7 +11,7 @@ public class TurningWheel : MonoBehaviour
     private GameObject leftSide, rightSide;
 
     private Quaternion _startRotation;
-
+    private bool _hasturned = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,11 +38,25 @@ public class TurningWheel : MonoBehaviour
             }
 
             float targetRotation = wheelTurningAngel * Input.GetAxis("Horizontal");
-
-            //transform.Rotate(Vector3.up, targetRotation);
-            SmoothRotate(Vector3.up, targetRotation);
+            //SmoothRotate(Vector3.up, targetRotation); 
         }
-        
+
+        if (!_hasturned && hAxisValue > 0.0f)
+        {
+            transform.Rotate(Vector3.up, -25.0f);
+            _hasturned = true;
+        }
+        if (!_hasturned && hAxisValue < 0.0f)
+        {
+            transform.Rotate(Vector3.up, 25.0f);
+            _hasturned = true;
+        }
+        if (_hasturned && hAxisValue == 0.0f)
+        {
+            transform.Rotate(Vector3.up, 0.0f);
+            _hasturned = false;
+        }
+
 
         //if(Input.GetKeyDown(KeyCode.Space)) 
         //{

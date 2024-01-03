@@ -33,7 +33,9 @@ public class SelfDrivingTrain : MonoBehaviour
 
        Vector3 force = Vector3.back * _actualSpeed * 1.0f;
 
-        rb.AddForce(force);
+        transform.Translate(force * Time.deltaTime);
+       
+        //rb.AddForce(force, ForceMode.Acceleration);
     }
 
     private void OnTriggerEnter(Collider other)
