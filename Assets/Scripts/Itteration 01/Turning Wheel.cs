@@ -23,6 +23,12 @@ public class TurningWheel : MonoBehaviour
     {
         float hAxisValue = Input.GetAxis("Horizontal");
 
+        if (this.transform.rotation == Quaternion.AngleAxis(0.0f, Vector3.up))
+        {
+            leftSide.SetActive(true);
+            rightSide.SetActive(true);
+        }
+
         if (hAxisValue > 0 || hAxisValue < 0)
         {
             switch (hAxisValue > 0)

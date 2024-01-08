@@ -182,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   rb: {fileID: -7040216243602878336}
+  selfDestroy: 0
 --- !u!1 &7700378662067372142
 GameObject:
   m_ObjectHideFlags: 0

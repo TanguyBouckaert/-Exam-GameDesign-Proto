@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FreeLookCamera : MonoBehaviour
 {
+    [SerializeField]
+    private float cameraSpeed = 2.5f;
+
+
     // Update is called once per frame
     void Update()
     {
@@ -17,7 +21,7 @@ public class FreeLookCamera : MonoBehaviour
             Vector3 moveVector = new Vector3(moveDirection.x, moveDirection.y, 0f);
             Vector3 moveDirectionWorld = Camera.main.transform.TransformDirection(moveVector);
 
-            transform.Translate(moveDirectionWorld * 2.5f * Time.deltaTime, Space.World);
+            transform.Translate(moveDirectionWorld * cameraSpeed * Time.deltaTime, Space.World);
         }
 
 

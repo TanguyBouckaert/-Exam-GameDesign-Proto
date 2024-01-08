@@ -10,8 +10,11 @@ public class SelfDrivingTrain : MonoBehaviour
     [SerializeField]
     private Rigidbody rb;
 
+    [SerializeField]
+    private bool selfDestroy = false;
+
     private bool _drive = true;
-    private float _actualSpeed = 2.5f;
+    private float _actualSpeed = 2.5f, _selfDestructTimer = 2.0f, _timer;
 
     private void Start()
     {
@@ -25,6 +28,7 @@ public class SelfDrivingTrain : MonoBehaviour
 
     private void FixedUpdate()
     {
+        _timer += Time.deltaTime;
         //Makes the train stop when it is required!
         if (_drive)
             _actualSpeed = Speed;
@@ -36,6 +40,13 @@ public class SelfDrivingTrain : MonoBehaviour
         transform.Translate(force * Time.deltaTime);
        
         //rb.AddForce(force, ForceMode.Acceleration);
+
+
+        if(selfDestroy && _timer >= _selfDestructTimer)
+        {
+            _timer = 0;
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
